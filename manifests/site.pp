@@ -13,4 +13,14 @@ class { 'nginx': }
 nginx::resource::vhost { 'demo':
   ensure   => present,
   www_root => '/var/www/demo',
+  listen_port => 8080,
+}
+
+file { ['/var/www', '/var/www/demo']:
+	ensure => directory,
+}
+
+file { '/var/www/demo/index.html':
+	source => '/vagrant/manifests/exercise-webpage/index.html',
+	ensure => present,
 }
